@@ -235,7 +235,9 @@ save(gca_mon_mods,
 
 #################### L2 SPEAKERS ########################################
 
-l2_data <- filter(stress_gc_subset, l1 != 'es') %>% 
+l2_data <- stress_gc_subset%>%
+  filter(., l1 != 'es') %>% 
+  filter(., participant != 'ies04' & participant != 'ies17' & participant != 'ies28' & participant != 'aes32') %>%
   mutate(., l1 = fct_relevel(l1, "en", "ma"))
 
 # Random effects structure ----------------------------------------------------
@@ -260,10 +262,11 @@ if(F){
   anova(mod_ot1, mod_ot2, mod_ot3)
   
   #           npar(Df?)    AIC    BIC  logLik deviance   Chisq Df Pr(>Chisq)    
-  # mod_ot1           9 191650 191726 -95816   191632                          
-  # mod_ot2          14 191568 191687 -95770   191540  91.526  5  < 2.2e-16 ***
-  # mod_ot3          20 191151 191321 -95556   191111 428.905  6  < 2.2e-16 ***
-
+  # mod_ot1         9 185950 186026 -92966   185932                          
+  # mod_ot2   14 185872 185990 -92922   185844  87.736  5  < 2.2e-16 ***
+  # mod_ot3   20 185459 185628 -92710   185419 424.968  6  < 2.2e-16 ***  
+  
+  
   
   mod_ot0 <- update(mod_ot3, . ~ . + (1 | target))
   
@@ -277,11 +280,11 @@ if(F){
   
   anova(mod_ot3, mod_ot0, mod_ot1a, mod_ot2a, mod_ot3a)
   #          npar    AIC    BIC  logLik deviance   Chisq Df Pr(>Chisq)    
-  # mod_ot3    20 191151 191321 -95556   191111                          
-  # mod_ot0    21 190712 190890 -95335   190670 441.128  1  < 2.2e-16 ***
-  # mod_ot1a   23 190315 190510 -95135   190269 401.236  2  < 2.2e-16 ***
-  # mod_ot2a   26 190168 190388 -95058   190116 152.954  3  < 2.2e-16 ***
-  # mod_ot3a   30 190115 190369 -95028   190055  61.043  4  1.751e-12 ***
+  # mod_ot3    20 185459 185628 -92710   185419                          
+  # mod_ot0    21 184996 185173 -92477   184954 465.356  1  < 2.2e-16 ***
+  #   mod_ot1a   23 184615 184809 -92284   184569 385.320  2  < 2.2e-16 ***
+  #   mod_ot2a   26 184485 184704 -92217   184433 135.484  3  < 2.2e-16 ***
+  #   mod_ot3a   30 184435 184688 -92188   184375  57.797  4  8.418e-12 ***
   
   
 }
@@ -296,7 +299,7 @@ if(F){
 
 if(F){
 # Base model
-gca_l2_mod_base <-
+gca_l2_mod_base <- 
   lmer(eLog ~ 1 + (ot1 + ot2 + ot3) +         
          (1 + condition_sum + (ot1 + ot2 + ot3) | participant) +
          (1 + ot1 + ot2 + ot3 | target), 
@@ -314,67 +317,67 @@ l2_l1_anova <-
   anova(gca_l2_mod_base, gca_l2_mod_l1_0, gca_l2_mod_l1_1,
         gca_l2_mod_l1_2, gca_l2_mod_l1_3)
 #                 npar    AIC    BIC logLik deviance  Chisq Df Pr(>Chisq)  
-# gca_l2_mod_base   30 188993 189246 -94466   188933                       
-# gca_l2_mod_l1_0   31 188992 189254 -94465   188930 2.8402  1    0.09193 .
-# gca_l2_mod_l1_1   32 188992 189262 -94464   188928 2.2740  1    0.13156  
-# gca_l2_mod_l1_2   33 188992 189271 -94463   188926 1.3905  1    0.23832  
-# gca_l2_mod_l1_3   34 188993 189280 -94462   188925 1.5640  1    0.21108   
+# gca_l2_mod_base   30 184435 184688 -92188   184375                        
+# gca_l2_mod_l1_0   31 184437 184698 -92188   184375 0.2224  1   0.637211   
+# gca_l2_mod_l1_1   32 184431 184701 -92183   184367 8.3263  1   0.003908 **
+# gca_l2_mod_l1_2   33 184433 184711 -92183   184367 0.3552  1   0.551194   
+# gca_l2_mod_l1_3   34 184431 184718 -92182   184363 3.1126  1   0.077688 . 
 
 
 # add stress effect to intercept, linear slope, quadratic, and cubic time terms
 
-gca_l2_mod_stress_0 <- update(gca_l2_mod_base,   . ~ . + condition_sum) 
+gca_l2_mod_stress_0 <- update(gca_l2_mod_l1_1,   . ~ . + condition_sum) 
 gca_l2_mod_stress_1 <- update(gca_l2_mod_stress_0, . ~ . + ot1:condition_sum) 
 gca_l2_mod_stress_2 <- update(gca_l2_mod_stress_1, . ~ . + ot2:condition_sum) # singular
 gca_l2_mod_stress_3 <- update(gca_l2_mod_stress_2, . ~ . + ot3:condition_sum)
 
 l2_stress_anova <-
-  anova(gca_l2_mod_base, gca_l2_mod_stress_0, gca_l2_mod_stress_1,
+  anova(gca_l2_mod_l1_1, gca_l2_mod_stress_0, gca_l2_mod_stress_1,
         gca_l2_mod_stress_2, gca_l2_mod_stress_3)
 #                     npar    AIC    BIC  logLik deviance Chisq Df Pr(>Chisq)    
-# gca_l2_mod_base       30 188993 189246 -94466   188933                       
-# gca_l2_mod_stress_0   31 188994 189256 -94466   188932 0.5701  1     0.4502  
-# gca_l2_mod_stress_1   32 188996 189267 -94466   188932 0.0232  1     0.8790  
-# gca_l2_mod_stress_2   33 188997 189276 -94465   188931 1.1810  1     0.2772  
-# gca_l2_mod_stress_3   34 188996 189283 -94464   188928 3.0916  1     0.0787 .
+# gca_l2_mod_l1_1       32 184431 184701 -92183   184367                       
+# gca_l2_mod_stress_0   33 184429 184707 -92182   184363 3.7177  1    0.05384 .
+# gca_l2_mod_stress_1   34 184431 184717 -92181   184363 0.3422  1    0.55855  
+# gca_l2_mod_stress_2   35 184427 184722 -92179   184357 5.3341  1    0.02091 *
+# gca_l2_mod_stress_3   36 184429 184732 -92178   184357 0.8045  1    0.36974
 
 
 ### ROUTE 1 (proficiency alone)
 
 # add proficiency effect to intercept, linear slope, quadratic, and cubic time terms
 
-gca_l2_mod_dele_0 <- update(gca_l2_mod_base,   . ~ . + DELE_z) 
+gca_l2_mod_dele_0 <- update(gca_l2_mod_stress_2,   . ~ . + DELE_z) 
 gca_l2_mod_dele_1 <- update(gca_l2_mod_dele_0, . ~ . + ot1:DELE_z) 
 gca_l2_mod_dele_2 <- update(gca_l2_mod_dele_1, . ~ . + ot2:DELE_z)
 gca_l2_mod_dele_3 <- update(gca_l2_mod_dele_2, . ~ . + ot3:DELE_z)
 
 l2_dele_anova <-
-  anova(gca_l2_mod_base, gca_l2_mod_dele_0, gca_l2_mod_dele_1,
+  anova(gca_l2_mod_stress_2, gca_l2_mod_dele_0, gca_l2_mod_dele_1,
         gca_l2_mod_dele_2, gca_l2_mod_dele_3)
-#                   npar    AIC    BIC logLik deviance  Chisq Df Pr(>Chisq)   
-# gca_l2_mod_base     30 188993 189246 -94466   188933                        
-# gca_l2_mod_dele_0   31 188987 189249 -94463   188925 7.5234  1    0.00609 **
-# gca_l2_mod_dele_1   32 188987 189258 -94462   188923 1.9574  1    0.16179   
-# gca_l2_mod_dele_2   33 188989 189268 -94461   188923 0.7517  1    0.38595   
-# gca_l2_mod_dele_3   34 188990 189278 -94461   188922 0.0976  1    0.75470  
+#                     npar    AIC    BIC logLik deviance  Chisq Df Pr(>Chisq)   
+# gca_l2_mod_stress_2   35 184427 184722 -92179   184357                        
+# gca_l2_mod_dele_0     36 184424 184728 -92176   184352 5.0895  1   0.024071 * 
+# gca_l2_mod_dele_1     37 184418 184730 -92172   184344 8.2057  1   0.004176 **
+# gca_l2_mod_dele_2     38 184419 184739 -92171   184343 1.3448  1   0.246196   
+# gca_l2_mod_dele_3     39 184420 184749 -92171   184342 0.8998  1   0.342824   
 
 
 # add interaction
 
-gca_l2_mod_dele_int_0 <- update(gca_l2_mod_dele_0,   . ~ . + l1:condition_sum:DELE_z) 
+gca_l2_mod_dele_int_0 <- update(gca_l2_mod_dele_1,   . ~ . + l1:condition_sum:DELE_z) 
 gca_l2_mod_dele_int_1 <- update(gca_l2_mod_dele_int_0, . ~ . + ot1:l1:condition_sum:DELE_z) 
 gca_l2_mod_dele_int_2 <- update(gca_l2_mod_dele_int_1, . ~ . + ot2:l1:condition_sum:DELE_z)
 gca_l2_mod_dele_int_3 <- update(gca_l2_mod_dele_int_2, . ~ . + ot3:l1:condition_sum:DELE_z)
 
 l2_dele_int_anova <-
-  anova(gca_l2_mod_dele_0, gca_l2_mod_dele_int_0, gca_l2_mod_dele_int_1,
+  anova(gca_l2_mod_dele_1, gca_l2_mod_dele_int_0, gca_l2_mod_dele_int_1,
         gca_l2_mod_dele_int_2, gca_l2_mod_dele_int_3)
 #                       npar    AIC    BIC logLik deviance  Chisq Df Pr(>Chisq)  
-# gca_l2_mod_dele_0       31 188987 189249 -94463   188925                       
-# gca_l2_mod_dele_int_0   33 188988 189267 -94461   188922 3.4608  2    0.17721  
-# gca_l2_mod_dele_int_1   35 188985 189281 -94458   188915 6.7273  2    0.03461 *
-# gca_l2_mod_dele_int_2   37 188982 189295 -94454   188908 7.3006  2    0.02598 *
-# gca_l2_mod_dele_int_3   39 188981 189311 -94451   188903 4.9358  2    0.08476 .
+# gca_l2_mod_dele_1       37 184418 184730 -92172   184344                       
+# gca_l2_mod_dele_int_0   39 184421 184750 -92172   184343 1.1931  2    0.55070  
+# gca_l2_mod_dele_int_1   41 184422 184768 -92170   184340 2.7700  2    0.25032  
+# gca_l2_mod_dele_int_2   43 184419 184781 -92166   184333 7.5365  2    0.02309 *
+# gca_l2_mod_dele_int_3   45 184421 184800 -92165   184331 1.7406  2    0.41883 
 
 gca_l2_mod_dele_final <- gca_l2_mod_dele_int_2
 
@@ -382,39 +385,39 @@ gca_l2_mod_dele_final <- gca_l2_mod_dele_int_2
 
 # add L2 use effect to intercept, linear slope, quadratic, and cubic time terms
 
-gca_l2_mod_use_0 <- update(gca_l2_mod_base,  . ~ . + use_z) 
+gca_l2_mod_use_0 <- update(gca_l2_mod_stress_2,  . ~ . + use_z) 
 gca_l2_mod_use_1 <- update(gca_l2_mod_use_0, . ~ . + ot1:use_z) 
 gca_l2_mod_use_2 <- update(gca_l2_mod_use_1, . ~ . + ot2:use_z)
 gca_l2_mod_use_3 <- update(gca_l2_mod_use_2, . ~ . + ot3:use_z)
 
 l2_use_anova <-
-  anova(gca_l2_mod_base, gca_l2_mod_use_0, gca_l2_mod_use_1,
+  anova(gca_l2_mod_stress_2, gca_l2_mod_use_0, gca_l2_mod_use_1,
         gca_l2_mod_use_2, gca_l2_mod_use_3)
 #                  npar    AIC    BIC logLik deviance  Chisq Df Pr(>Chisq)
-# gca_l2_mod_base    30 188993 189246 -94466   188933                       
-# gca_l2_mod_use_0   31 188995 189257 -94466   188933 0.1961  1     0.6579  
-# gca_l2_mod_use_1   32 188995 189266 -94466   188931 1.1309  1     0.2876  
-# gca_l2_mod_use_2   33 188993 189272 -94463   188927 4.7501  1     0.0293 *
-# gca_l2_mod_use_3   34 188991 189279 -94462   188923 3.3476  1     0.0673 .
+# gca_l2_mod_stress_2   35 184427 184722 -92179   184357                       
+# gca_l2_mod_use_0      36 184429 184732 -92178   184357 0.6689  1    0.41342  
+# gca_l2_mod_use_1      37 184425 184737 -92175   184351 6.0747  1    0.01371 *
+# gca_l2_mod_use_2      38 184424 184744 -92174   184348 2.4578  1    0.11694  
+# gca_l2_mod_use_3      39 184424 184753 -92173   184346 1.9997  1    0.15733 
 
 # add interaction
 
-gca_l2_mod_use_int_0 <- update(gca_l2_mod_use_2,     . ~ . + l1:condition_sum:use_z) 
+gca_l2_mod_use_int_0 <- update(gca_l2_mod_use_1,     . ~ . + l1:condition_sum:use_z) 
 gca_l2_mod_use_int_1 <- update(gca_l2_mod_use_int_0, . ~ . + ot1:l1:condition_sum:use_z) 
 gca_l2_mod_use_int_2 <- update(gca_l2_mod_use_int_1, . ~ . + ot2:l1:condition_sum:use_z)
 gca_l2_mod_use_int_3 <- update(gca_l2_mod_use_int_2, . ~ . + ot3:l1:condition_sum:use_z)
 
 l2_use_int_anova <-
-  anova(gca_l2_mod_use_0, gca_l2_mod_use_int_0, gca_l2_mod_use_int_1,
+  anova(gca_l2_mod_use_1, gca_l2_mod_use_int_0, gca_l2_mod_use_int_1,
         gca_l2_mod_use_int_2, gca_l2_mod_use_int_3)
 #                      npar    AIC    BIC logLik deviance   Chisq Df Pr(>Chisq)   
-# gca_l2_mod_use_0       31 188995 189257 -94466   188933                         
-# gca_l2_mod_use_int_0   35 188996 189292 -94463   188926  6.2537  4   0.180988   
-# gca_l2_mod_use_int_1   37 188987 189300 -94456   188913 13.4092  2   0.001225 **
-# gca_l2_mod_use_int_2   39 188987 189317 -94455   188909  3.4908  2   0.174576   
-# gca_l2_mod_use_int_3   41 188989 189336 -94454   188907  1.9898  2   0.369763 
+# gca_l2_mod_use_1       37 184425 184737 -92175   184351                          
+# gca_l2_mod_use_int_0   39 184428 184757 -92175   184350  0.6800  2  0.7117805    
+# gca_l2_mod_use_int_1   41 184423 184769 -92171   184341  8.5969  2  0.0135899 *  
+# gca_l2_mod_use_int_2   43 184421 184783 -92168   184335  6.3740  2  0.0412957 *  
+# gca_l2_mod_use_int_3   45 184410 184789 -92160   184320 15.4523  2  0.0004411 ***
 
-gca_l2_mod_use_final <- gca_l2_mod_use_int_1
+gca_l2_mod_use_final <- gca_l2_mod_use_int_3
 
 
 ### ROUTE 3 (working memory) 
@@ -461,9 +464,9 @@ mod_spec <- c('_base',
               "_dele_int_0", "_dele_int_1", "_dele_int_2", "_dele_int_3",
               "_use_0", "_use_1", "_use_2", "_use_3", 
               "_use_int_0", "_use_int_1", "_use_int_2", "_use_int_3",
-              "_wm_0", "_wm_1", "_wm_2", "_wm_3",
-              "_wm_int_0", "_wm_int_1", "_wm_int_2", "_wm_int_3",
-              '_dele_final', '_use_final', '_wm_final')
+              # "_wm_0", "_wm_1", "_wm_2", "_wm_3",
+              # "_wm_int_0", "_wm_int_1", "_wm_int_2", "_wm_int_3",
+              '_dele_final', '_use_final') #, '_wm_final'
 
 # Store ind models in list
 gca_l2_mods <- mget(c(paste0(mod_type, mod_spec)))
@@ -475,16 +478,16 @@ save(gca_l2_mods,
 
 # Save anova model comparisons
 nested_model_comparisons <-
-  mget(c("mon_cond_anova", "mon_wm_anova", "mon_int_anova",
+  mget(c(#"mon_cond_anova", "mon_wm_anova", "mon_int_anova",
          'l2_l1_anova', 'l2_stress_anova', 
          'l2_dele_anova', 'l2_dele_int_anova',
-         'l2_use_anova', 'l2_use_int_anova',
-         'l2_wm_anova', 'l2_wm_int_anova'
+         'l2_use_anova', 'l2_use_int_anova'#,
+         #'l2_wm_anova', 'l2_wm_int_anova'
   ))
 
 save(nested_model_comparisons,
      file = here("mods", "stress", "gca",
-                 "nested_model_comparisons.Rdata"))
+                 "nested_model_comparisons_l2.Rdata"))
 
 
 }
@@ -573,13 +576,14 @@ target_offset_preds_l2_wm <- filter(fits_all_l2_wm, time_zero == 4) %>%
   arrange(l1)
 
 # Save models predictions
-model_preds <- mget(c("fits_all_mon", "fits_all_l2_dele", "fits_all_l2_use", "fits_all_l2_wm",
-                      "target_offset_preds_mon", "target_offset_preds_l2_dele",
-                      "target_offset_preds_l2_use", "target_offset_preds_l2_wm"))
+model_preds <- mget(c(#"fits_all_mon", "fits_all_l2_dele", "fits_all_l2_use", "fits_all_l2_wm",
+                      #"target_offset_preds_mon", "target_offset_preds_l2_wm",
+                      "target_offset_preds_l2_dele",
+                      "target_offset_preds_l2_use"))
 
 save(model_preds,
      file = here("mods", "stress", "gca",
-                 "model_preds.Rdata"))
+                 "model_preds_l2.Rdata"))
 
 # MON without WM score
 saveRDS(target_offset_preds_mon, file = here("mods", "stress", "gca", "model_preds_mon.Rdata"))

@@ -57,7 +57,7 @@ load(paste0(gca_mods_path, "/nested_model_comparisons.Rdata"))
 
 mon_onset_v1_final <- readRDS(here("mods", "stress", "glmm", "onset_v1", "mon_onset_v1_final.rds"))
 l2_onset_c3_dele <- readRDS(here("mods", "stress", "glmm", "onset_c3", "l2_onset_c3_dele_final_z.rds"))
-l2_onset_c3_dele <- readRDS(here("mods", "stress", "glmm", "onset_c3", "l2_onset_c3_dele_final_z.rds"))
+l2_onset_c3_use <- readRDS(here("mods", "stress", "glmm", "onset_c3", "l2_onset_c3_use_final_z.rds"))
 
 ```
 
@@ -82,37 +82,39 @@ The tables can also be copy and pasted where appropriate.
 
 Statistical analyses were conducted on R (R Core Team, 2019) using the packages *lme4* (D. Bates, Mächler, Bolker, & Walker, 2014) and *multcomp* (Hothorn et al., 2016). 
 The gaze-fixation data was downsampled to 10 ms and 50 ms bins. 
-The 50 ms bins data were modeled using a growth curve analysis (GCA, Mirman, 2016) to observe how the pattern of gaze fixations changed over time, including linear, quadratic, and cubic orthogonal polynomials.
-<!-- I think you need a preposition or something before including, e.g., "by including" --> 
-We centered the data at 200 ms after the onset of the last syllable of the target items to account for the time it takes to plan and launch a saccade (e.g., Fischer, 1992; Saslow, 1967). 
-<!-- If the time course is centered at 200ms after the onset of the last syllable of the target word why do you have the 200ms vertical line? Also how is it possible for the ES group to be predicting at this point? --> 
+The 50 ms bins data were modeled using a growth curve analysis (GCA, Mirman, 2016) to observe how the pattern of gaze fixations changed over time by including linear, quadratic, and cubic orthogonal polynomials.
+<!-- GOOD: I think you need a preposition or something before including, e.g., "by including" --> 
+We centered the data at the onset of the last syllable of the target items, and calculated estimations and probabilities of target fixations 200 ms afterwards to account for the time it takes to plan and launch a saccade (e.g., Fischer, 1992; Saslow, 1967). 
+<!-- GOOD: If the time course is centered at 200ms after the onset of the last syllable of the target word why do you have the 200ms vertical line? Also how is it possible for the ES group to be predicting at this point? --> 
 The empirical logit transformation was applied to binary responses (fixations on target or distractor, Barr, 2008). 
-The 10 ms bins data were model using generalized linear mixed models (GLMM) at 200 ms after word target onset, onset of each segment in the target syllable, and onset of the suffix syllable to analyze the specific effect of each fixed effect on prediction and to find out precisely when each population started to anticipate.
-<!-- This sentence reads funny. You mean you used only one bin at three different time points, right? It sounds like you still analyzed the time course but I don't think that is what you mean. --> 
-For both the GCA and the GLMMs we first ran a model for the monolingual speakers with lexical stress as fixed effect and participant and item as random effects. 
-<!-- 'as a fixed effect', this model didn't include time terms for the GCA? --> 
-For the L2 speakers, we ran two GCA and two GLMM at each time stamp of interest.
-<!-- I don't follow this. How can you run a GCA at one time stamp? And I dont know what a time stamp is... the time course? --> 
-The first model of each kind included L1, lexical stress, and proficiency as fixed effects. 
-The second one included L1, lexical stress, and L2 use as fixed effects. 
-<!-- You need to explain why you did this. --> 
-L1 was categorical, stood for transfer and was sum-coded. 
-<!-- You need to explain this more clearly. --> 
-Lexical stress was categorical and was sum-coded. 
-Proficiency and language use were continuous and standarized to z-scores. 
-<!-- "to z-scores" is redundant". Also you are missing a "d" in "standardized" --> 
-By-subject and by-item random effects were tested in all models. 
-<!-- What about the time terms? Weren't their varying slopes? --> 
+The 10 ms bins data were used for individual generalized linear mixed models (GLMM) at the bins for word target onset, onset of each segment in the target syllable, and onset of the suffix syllable to analyze the specific effect of each fixed effect on prediction and to find out precisely when each population started to anticipate.
+<!-- GOOD: This sentence reads funny. You mean you used only one bin at three different time points, right? It sounds like you still analyzed the time course but I don't think that is what you mean. --> 
+For both the GCA and the GLMMs we first ran a model for the monolingual speakers with lexical stress and time terms as fixed effects and participant and item as random effects. 
+<!-- GOOD: 'as a fixed effect', this model didn't include time terms for the GCA? --> 
+For the L2 speakers, we ran two GLMM at each bin of interest and two GCA.
+<!-- GOOD: I don't follow this. How can you run a GCA at one time stamp? And I dont know what a time stamp is... the time course? --> 
+The first model of each kind included L1, lexical stress, proficiency and time terms as fixed effects. 
+The second one included L1, lexical stress, L2 use and time terms as fixed effects. 
+We split the fixed effects into two different models to avoid overfitting our data and to make the effects of proficiency and L2 use interpretable.
+<!-- GOOD: You need to explain why you did this. --> 
+L1 represented the similarity in phonology and morphology between English or Mandarin and Spanish that speakers could potentially transfer.
+L1 was categorical and was sum-coded. 
+<!-- GOOD: You need to explain this more clearly. --> 
+Lexical stress was also categorical and sum-coded. 
+Proficiency and language use were continuous and standardized. 
+<!-- GOOD: "to z-scores" is redundant". Also you are missing a "d" in "standardized" --> 
+By-subject, by-item and time term random effects were tested in all models. 
+<!-- GOOD: What about the time terms? Weren't their varying slopes? --> 
 Nested model comparisons were implemented to assess main effects and interactions.
 
 # 4. Results
 The time course data for the three L1 populations are shown in Figure 3. 
 The time courses reveal that gaze fixations on the target increased over time.
-The three L1s fixated on the target at chance from the beginning of the sentence and increased fixations on the target before the offset of the target syllable.
-<!-- Nitpicky, but the L1s don't fixate on anything. --> 
+The three L1 populations fixated on the target at chance from the beginning of the sentence.
+<!-- GOOD: Nitpicky, but the L1s don't fixate on anything. --> 
 Monolingual Spanish speakers (SS) increased gaze fixations on the target earlier than L2 speakers.
-The fixations increase plateaued shortly after target syllable offset.
-<!-- The figure includes ES, EN and MA -->
+The L2 speakers from both L1s increased fixations on the target at the same time on average.
+<!-- GOOD: The figure includes ES, EN and MA -->
 
 ```{r, 'plot-time-course', echo=FALSE, fig.cap="Figure 3. Gaze fixation patterns on target from 500 ms before target syllable offset to 1000 ms after as a function of L1 and stress condition."}
 knitr::include_graphics(
@@ -123,7 +125,7 @@ knitr::include_graphics(
 
 The summaries for the final models of the GCA are in the Appendices 2 (SS), 3 and 4 (L2).
 The GCA models estimated the probability of gaze fixations on the target at the offset of the first syllable in the verb; the probabilities were estimated for each L1 population in both lexical stress conditions (paroxytone form = present, oxytone form = preterit) in comparison to a 50% fixation chance.
-<!--The probabilities are contained in Tables 1 and .-->
+<!--L: The probabilities are contained in Tables 1 and .-->
 The results for SS are presented first.
 For the L2 speakers, the results for proficiency are presented first and results for L2 use last.
 
@@ -152,14 +154,14 @@ report_row <- function(row_name) report_fixef_row(params, row_name)
 ```
 
 
-We conducted a GCA on SS to take them as reference when discussing our findings.
-The model intercept for SS estimates their log odds for gaze fixation on the target averaging across lexical stress condition at `r report_row('1')`. 
-<!-- You can report this as a probability too to help your reader interpret it `plogis(X)` --> 
-There were main effects in the linear (`r report_row('2')`), quadratic (`r report_row('3')`) and cubic polynomial time terms (`r report_row('4')`).
-<!-- I think you want the preposition "on" here. --> 
+We conducted a GCA on SS and took them as reference when discussing our findings.
+The probability of SS fixating on the target was 0.953 (LB = 0.942; UB = 0.962) averaging across stress conditions.
+<!-- GOOD: You can report this as a probability too to help your reader interpret it `plogis(X)` --> 
+There were main effects on the linear (`r report_row('2')`), quadratic (`r report_row('3')`) and cubic polynomial time terms (`r report_row('4')`).
+<!-- GOOD: I think you want the preposition "on" here. --> 
 These results suggest SS were predicting the verb form upon hearing a stressed or unstressed syllable.
-The fixation probability estimate of SS for both stress conditions is 0.953 (LB = 0.942; UB = 0.962).
-<!-- Over the time course? At a specific point? --> 
+
+<!-- GOOD: Over the time course? At a specific point? --> 
 Figure 4 shows the GCA model fit for SS.
 
 ```{r, 'plot-preds-mon', echo=FALSE, fig.cap="Figure 4. Growth curve analysis estimates of fixations on target as a function of lexical stress for the Spanish monolingual speakers during the analysis window. Lines represent model estimates, and the transparent ribbons represent ±SE. Empirical logit values on y-axis correspond to proportions of 0.12, 0.50, 0.88, and 0.98. The horizontal dotted line represents the 50% probability of fixating on the targets. The vertical dotted line indicates 200 ms after the offset of the target syllable."}
@@ -170,11 +172,11 @@ knitr::include_graphics(
 
 <!-- Nice plot --> 
 
-Given the near ceiling effect in SS, we performed post-hoc GLMMs at the onset of every segment in the target syllable to find out when SS started anticipating.
+Given the near ceiling effect in SS, we performed post-hoc GLMMs at the onset of every segment in the target word to find out when SS started anticipating.
 We started at the onset of the verb.
 The intercept log odds estimate for SS at verb onset was <em>&gamma;</em>&nbsp;=&nbsp;-0.138 (*p*&nbsp;&lt;&nbsp;0.467), indicating SS were at chance level and nothing so far was cueing them towards one tense or the other.
-At the onset of the vowel in the target syllable, the log odds estimate was <em>&gamma;</em>&nbsp;=&nbsp;0.402, *SE* =  0.189, *z* = -0.727, *p*&nbsp;&lt;&nbsp;0.031, demonstrating SS were already predicting (see Table 0 for all fixed effects).
-<!-- This result suggests there is some acoustic cue that seeps into the consonant that allows SS to start anticipating only by hearing that segment, as could be intensity. -->
+At the onset of the vowel in the target syllable (i.e., first syllable), the log odds estimate was <em>&gamma;</em>&nbsp;=&nbsp;0.402, *SE* =  0.189, *z* = -0.727, *p*&nbsp;&lt;&nbsp;0.031, demonstrating SS were already predicting (see Table 0 for all fixed effects).
+<!-- L: This result suggests there is some acoustic cue that seeps into the consonant that allows SS to start anticipating only by hearing that segment, as could be intensity. -->
 
 
 <!-- Since you are focusing on where they start to predict I think it would be a good idea to present this as a probability (rather than log odds) --> 
@@ -194,10 +196,11 @@ mon_onset_v1_final %>%
 
 
 Two GCA analyses were conducted for the L2 groups.
-One tested L2 proficiency along with L1 and stress condition.
+One tested L2 proficiency along with L1, stress condition and time terms.
 The other one tested L2 use instead.
-<!-- Can you explain this a bit more and justify why there are two models? --> 
-In both models, English speakers and present tense (paroxytone stress) are the baseline.
+This division was performed to avoid overfitting and to make interpretation of results easier.
+<!-- GOOD: Can you explain this a bit more and justify why there are two models? --> 
+In both models, English speakers and present tense (paroxytone stress) were the baseline.
 
 ```{r, 'write-up-prep-dele', warning=F, eval=T}
 # Prepare table to support easy in-line printing of equations
@@ -246,19 +249,20 @@ pretty_fixed_effects %>%
 Table 1: Growth curve model fixed effects for L2 speakers (proficiency).
 
 
-The GCA with proficiency as a predictor estimates the intercept log odds at `r report_row(1)`.
-The linear (`r report_row(2)`), quadratic (`r report_row(3)`) and cubic (`r report_row(4)`) polynomial time terms estimates reached significance.
-These results suggest the English speakers were anticipating present tense at target syllable offset.
-<!-- does it? Which of the 4 terms? Can you be more specific here? --> 
-The absence of main effects from L1 (<em>&chi^2^;</em>&nbsp;(1) = 2.840, *p* = 0.092) and stress condition (<em>&chi^2^;</em>&nbsp;(1) = 0.570, *p* = 0.450) suggest that they were also anticipating preterit tense and that Mandarin speakers were also anticipating both tenses.
-<!-- Ok, I definitely don't follow here. How does the absence of a main effect imply they were anticipating? Don't you just mean that there wasn't a difference in the log odds of focusing on the target based on tense and stress? You need to walk the reader through this. --> 
-<!--These results suggest the L2 speakers were anticipating both tenses at target syllable offset, regardless of their L1.-->
-Adding proficiency resulted in a main effect of proficiency (<em>&chi^2^;</em>&nbsp;(1) = 7.523, *p* = 0.006), such that the higher the L2 proficiency, the higher the likelihood of predicting (`r report_row(5)`).
-<!-- Again, explain how. What is this specific parameter estimate? --> 
+The GCA with proficiency as a predictor estimates the intercept log odds at `r report_row(1)`, which indicates the L2 speakers were anticipating both tenses at target syllable offset.
+The linear (`r report_row(2)`), quadratic (`r report_row(3)`) and cubic (`r report_row(4)`) polynomial time terms estimates reached significance, and thus we kept them in the model.
+<!-- GOOD: does it? Which of the 4 terms? Can you be more specific here? --> 
+
+The absence of main effects from L1 (<em>&chi^2^;</em>&nbsp;(1) = 2.840, *p* = 0.092) and stress condition (<em>&chi^2^;</em>&nbsp;(1) = 0.570, *p* = 0.450) suggest that there was no difference between the speakers of each L1 and that no stress condition was generally more useful in anticipating.
+<!-- GOOD?: Ok, I definitely don't follow here. How does the absence of a main effect imply they were anticipating? Don't you just mean that there wasn't a difference in the log odds of focusing on the target based on tense and stress? You need to walk the reader through this. --> 
+
+Adding proficiency resulted in a main effect of proficiency (<em>&chi^2^;</em>&nbsp;(1) = 7.523, *p* = 0.006), with an estimate of `r report_row(5)`.
+This estimate suggests that for each extra point in the proficiency test, the probability of predicting increased by `r plogis(0.222)`
+<!-- GOOD?: Again, explain how. What is this specific parameter estimate? --> 
 The variability in prediction probability as a function of proficiency is shown in Table 2.
 The values under the Proficiency column refer to the minimum and maximum scores obtained within each L1 as converted to z-scores.
 As Table 2 shows, the higher the proficiency, the higher the probability of fixating on the target at target syllable offset.
-<!-- These probabilities come from the predict function from the GCA, right? They way you are reporting this it sounds as if you are saying the parameter estimates of the GCA tell you this. --> 
+<!-- These probabilities come from the predict function from the GCA, right? The way you are reporting this it sounds as if you are saying the parameter estimates of the GCA tell you this. --> 
 
 ```{r, table-dele-probs, eval=T, echo=F}
 
@@ -267,7 +271,7 @@ border_2 <- fp_border(width = 0.75)
 
 model_preds$target_offset_preds_l2_dele %>% 
   mutate(stress = if_else(stress == 1, "Present", "Preterit"),
-         l1 = if_else(l1 == 'en', "English", "Mandarin"),
+         l1 = if_else(l1 == 'EN', "English", "Mandarin"),
          l1 = fct_relevel(l1, "English", "Mandarin")) %>% 
   arrange(l1, stress) %>% 
   group_by(l1, stress) %>%
@@ -293,19 +297,27 @@ model_preds$target_offset_preds_l2_dele %>%
 
 
 The estimates also show interaction effects between proficiency x stress in the English speakers in the linear time term (`r report_row(8)`) and the quadratic term (`r report_row(10)`).
+The effect on the linear term indicates present tense was overall anticipated earlier than preterit tense.
+However, the positive value of the interaction suggests a more bowed curved for higher proficiency individuals, pointing towards them anticipating preterit tense faster than lower proficiency speakers. 
+This effect suggests higher proficiency was associated with earlier anticipation in the preterit tense, while it played barely any role in the present tense, as shown on the top left panel of Figure 5.
+The effect on the quadratic term indicates higher proficiency in the preterit tense was associated with earlier anticipation, but not in the present tense, where proficiency made no difference.
 These two interactions suggest that the influence of proficiency varied according to stress pattern in English speakers.
-In the present tense, when the stress pattern was paroxytone, proficiency played barely any role, as shown on the top left panel of Figure 5.
+In the present tense, when the stress pattern was paroxytone, proficiency 
 In the preterit tense, with an oxytone pattern, speakers with higher proficiency were likelier to predict and did so earlier.
 
 <!-- Be very careful with your interpretation of a quadratic effect. It has to do with bowing in the curve at the mid point, but you aren't describing that. --> 
 
-```{r, 'plot-preds-dele-split', echo=FALSE, fig.cap="Figure 5. Growth curve analysis estimates of fixations on target as a function of lexical stress for each L2 group during the analysis window. Lines represent model estimates, and the transparent ribbons represent ±SE. Empirical logit values on y-axis correspond to proportions of 0.12, 0.50, 0.88, and 0.98. The horizontal dotted line represents the 50% probability of fixating on the targets. The vertical dotted line indicates 200 ms after the offset of the target syllable."}
+```{r, 'plot-preds-dele-split', echo=FALSE, fig.cap="Figure 5a. Growth curve analysis estimates of fixations on target as a function of lexical stress for each L2 group during the analysis window. Lines represent model estimates, and the transparent ribbons represent ±SE. Empirical logit values on y-axis correspond to proportions of 0.12, 0.50, 0.88, and 0.98. The horizontal dotted line represents the 50% probability of fixating on the targets. The vertical dotted line indicates 200 ms after the offset of the target syllable."}
+knitr::include_graphics(
+  here("figs", "stress", "gca", "stress_dele_l1.png")
+)
+```
+
+```{r, 'plot-preds-dele-split', echo=FALSE, fig.cap="Figure 5b. Growth curve analysis estimates of fixations on target as a function of lexical stress for each L2 group during the analysis window. Lines represent model estimates, and the transparent ribbons represent ±SE. Empirical logit values on y-axis correspond to proportions of 0.12, 0.50, 0.88, and 0.98. The horizontal dotted line represents the 50% probability of fixating on the targets. The vertical dotted line indicates 200 ms after the offset of the target syllable."}
 knitr::include_graphics(
   here("figs", "stress", "gca", "stress_dele_split.png")
 )
 ```
-
-
 
 ```{r, 'write-up-prep-use', warning=F, eval=T}
 # Prepare table to support easy in-line printing of equations
@@ -356,10 +368,12 @@ pretty_fixed_effects %>%
 
 *Table 3*: Growth curve model fixed effects for L2 speakers (L2 use)
 
-The GCA analysis with L2 weekly use in percentage estimates the intercept log odds at `r report_row(1)` for the L2 speakers.
-There estimates of the linear (`r report_row(2)`), quadratic (`r report_row(3)`) and cubic (`r report_row(4)`) polynomial time terms were significant.
-These results suggest again the L2 speakers were anticipating tense at target syllable offset.
-<!-- Same comments as above. I don't believe it is this straightforward. You will need to explain a bit more. --> 
+The GCA analysis with L2 weekly use in percentage estimates the intercept log odds at `r report_row(1)` for the L2 speakers, which suggests again the L2 speakers were anticipating tense at target syllable offset.
+The estimates of the linear (`r report_row(2)`), quadratic (`r report_row(3)`) and cubic (`r report_row(4)`) polynomial time terms were significant.
+These effects suggest differences in slope and bow curve. 
+Since they improved the model, we kept them.
+
+<!-- GOOD: Same comments as above. I don't believe it is this straightforward. You will need to explain a bit more. --> 
 There was an effect of L2 use in the quadratic polynomial time term (<em>&chi^2^;</em>&nbsp;(1) = 4.750, *p* = 0.029), such that the more frequent the use, the higher the likelihood of predicting (`r report_row(7)`).
 The probabilities of fixating as a function of L2 use can be seen in Table 4.
 The two values in the column Weekly L2 % use represent the minimum and the maximum L2 use reported by the participants.
@@ -406,13 +420,17 @@ The steeper slope can be observed in Figure 6.
 
 ```{r, 'plot-preds-use-split', echo=FALSE, fig.cap="Figure 6. Growth curve analysis estimates of fixations on target as a function of lexical stress and L2 weekly use for each L2 group during the analysis window. Lines represent model estimates, and the transparent ribbons represent ±SE. Empirical logit values on y-axis correspond to proportions of 0.12, 0.50, 0.88, and 0.98. The horizontal dotted line represents the 50% probability of fixating on the targets. The vertical dotted line indicates 200 ms after the offset of the target syllable."}
 knitr::include_graphics(
-  here("figs", "stress", "gca", "stress_use_l1.png")
+  here("figs", "stress", "gca", "stress_use_cond.png")
 )
 ```
 
 The interaction effect of L2 use x stress in the linear term also caused differences by group (English: `r report_row(10)`; Mandarin: `r report_row(11)`)
-This interaction suggests that the beneficial effects of increased L2 use had a greater impact in the present tense, as Figure 7 shows, by helping speakers anticipate faster.
-<!-- same comments as above. You need to explain how. --> 
+In both groups, this interaction suggests that the beneficial effects of increased L2 use had a different impact depending on the tense, as Figure 7 shows.
+In English speakers, differences in L2 use only showed a trend to facilitate anticipation in the preterit tense, while L2 use had no effect in the present tense.
+In Mandarin speakers, the trend was the opposite. 
+The variability in L2 use had a smaller effect in the preterit tense than in present tense.
+However, there was no clear beneficial effect of L2 use on present tense anticipation.
+<!-- GOOD?: same comments as above. You need to explain how. --> 
 
 ```{r, 'plot-preds-use-split', echo=FALSE, fig.cap="Figure 7. Growth curve analysis estimates of fixations on target as a function of lexical stress and weekly L2 use for each stress condition during the analysis window. Lines represent model estimates, and the transparent ribbons represent ±SE. Empirical logit values on y-axis correspond to proportions of 0.12, 0.50, 0.88, and 0.98. The horizontal dotted line represents the 50% probability of fixating on the targets. The vertical dotted line indicates 200 ms after the offset of the target syllable."}
 knitr::include_graphics(
@@ -423,9 +441,9 @@ knitr::include_graphics(
 
 
 Following the same procedure as for SS, we conducted post-hoc GLMMs to find out when the L2 speakers started to anticipate (see Tables 5 and 6).
-For the GLMMs, we also ran two nested comparison models at each time stamp of interest (onset of target word, and then onset of each segment in the first syllable and onset of second syllable).
-<!-- Are these nested model comparisons? THey just seem like different models. How are they nested? --> 
-One of them included proficiency as fixed effect and the other one included L2 use.
+For the GLMMs, we also ran two models at each bin of interest (onset of target word, and then onset of each segment in the first syllable and onset of second syllable).
+<!-- GOOD: Are these nested model comparisons? THey just seem like different models. How are they nested? --> 
+In both cases, nested model comparisons were conducted for each fixed effect: L1, stress condition, and proficiency or L2 use.
 As a reminder, the baselines are present tense and L1 English speakers.
 
 
@@ -464,13 +482,13 @@ l2_onset_c3_use %>%
 
 In contrast to SS, L2 speakers only showed signs of anticipation at the onset of the second syllable.
 At this time stamp, the log odd intercept estimates were significant for the first time in both L2 models: with proficiency <em>&beta;</em>&nbsp;=&nbsp;1.137, *SE* = 0.123, *z* = 9.239, *p* = 0.000; with L2 use <em>&beta;</em>&nbsp;=&nbsp;1.142, *SE* = 0.130, *z* = 8.781, *p* = 0.000. 
-<!--This delay in comparison to SS indicates L2 speakers need more information to generate verb tense suffix predictions.
+<!--L: This delay in comparison to SS indicates L2 speakers need more information to generate verb tense suffix predictions.
 While SS do not seem to need lexical stress information, this piece of information is crucial for L2 speakers to generate the prediction.-->
 While no L1 main effects were observed in the GCA models, the GLMMs run to analyze the influence of predictors in more detail did show a difference between L2 groups (<em>&chi^2^;</em>&nbsp;(1) = 3.894, *p* = 0.048).
 The specific estimates for each model, one when L2 proficiency was considered (<em>&beta;</em>&nbsp;=&nbsp;-0.304, *SE* = 0.136, *z* = -2.238, *p* = .025)  and the other when L2 use was included , follow a similar trend.
 In the proficiency model, there was a main effect of L1 (<em>&beta;</em>&nbsp;=&nbsp;-0.352, *SE* = 0.142, *z* = -2.484, *p* = .013), such that Mandarin speakers anticipated less than English speakers.
-There was also a main effect of proficiency (<em>&chi^2^;</em>&nbsp;(1) = 11.681, *p* = 0.001), in that higher proficiency correlated with increased anticipation (<em>&gamma;</em>&nbsp;=&nbsp;0.298, *SE* = 0.085, *z* = 3.496, *p* = .000).
-<!-- Explain how you know this from the model. --> 
+There was also a main effect of proficiency (<em>&chi^2^;</em>&nbsp;(1) = 11.681, *p* = 0.001). The positive value of the estimate em>&gamma;</em>&nbsp;=&nbsp;0.298, *SE* = 0.085, *z* = 3.496, *p* = .000 indicates that higher proficiency correlated with increased anticipation.
+<!-- GOOD: Explain how you know this from the model. --> 
 These values in the proficiency model indicate that Mandarin speakers were anticipating less than English speakers, and that proficiency mediated ability to anticipate in both populations, with more proficient individuals generating predictions more consistently.
 In the L2 use model, there was a main effect L2 use (<em>&chi^2^;</em>&nbsp;(1) = 5.792, *p* = 0.016), pointing that greater L2 use correlated with better anticipation <em>&beta;</em>&nbsp;=&nbsp;0.236, *SE* = 0.097, *z* = 2.435, *p* = 0.015.
 

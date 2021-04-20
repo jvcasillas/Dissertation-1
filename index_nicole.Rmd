@@ -1,0 +1,286 @@
+---
+title: "The Influence of L1 Phonological Transfer and L2 Proficiency on Morphosyntactic Anticipation in Monolinguals and Bilinguals"
+subtitle: "Rutgers University"
+author: "Laura Fernandez Arroyo"
+date: "October 5, 2020"
+output: 
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: ["hygge", "rutgers-fonts", "rutgers"]
+    nature:
+      beforeInit: "macros.js"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+class: center
+
+# .center[Prediction]
+
+```{r knitr, include=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+include_graphics("./avoid.gif")
+```
+
+???
+
+  Animals
+  Plants
+
+---
+
+exclude: false
+
+# Linguistic anticipation
+</br>
+</br>
+</br>
+.pull-left[## Domain-specific]
+</br>
+.center[vs.]
+</br>
+.pull-right[## Domain-general]
+
+---
+
+# L1 morphosyntactic anticipation
+
+## Central Swedish
+
+Low tone + singular: _fisken_ 'fish<sub>[SG]</sub>'     
+High tone + plural: _fiskar_ 'fish<sub>[PL]</sub>' <font size="-1">     
+(Roll et al., 2010)</font>
+
+## Spanish
+First syllable stressed + present: _canta_ 's/he sings'     
+First syllable unstressed + past: _cantó_ 's/he sang' <font size="-1">     
+(Sagarra & Casillas, 2018)</font>
+
+---
+
+# L2 morphosyntactic anticipation
+
+Lexical stress > verb tense, aspect, person, and number
+
+Monolingual speakers of Spanish and advanced L2 Spanish speakers whose L1 is English do it (living in L1 context) <font size="-1">(Sagarra & Casillas, 2018; Lozano et al., 2020)</font>
+
+Factors: 
+- L1 transfer and L2 proficiency <font size="-1">(Dupoux et al., 2008; Dussias et al., 2013; Sagarra & Casillas, 2018)</font>
+- WM <font size="-1">(Sagarra & Casillas, 2018; Lozano et al., 2020)</font>
+- Context <font size="-1">(Beatty-Martínez et al., 2019)</font>
+
+---
+
+# Linguistic phenomena
+</br>
+## Lexical stress
+
+.pull-left[
+.bold[Spanish: pitch + intensity]        
+ _TÉRmino_ 'term'                 
+ _terMIno_ 'I finish'             
+ _termiNÓ_ 's/he finished'
+ ]
+ 
+.pull-right[
+.bold[English: duration + vowel quality ]</br>
+PROduce (noun) </br>
+proDUCE (verb) </br>
+]
+ 
+ 
+---
+
+# Linguistic phenomena
+
+## Tone
+
+Mandarin: Pitch <br/>
+.pull-left[
+```{r, include=TRUE, echo=FALSE}
+include_graphics("./00_intro/figs/thoughtco.png", dpi = 100) # the larger the number, the smaller the image
+```
+]
+
+.pull-right[
+</br>
+</br>
+<audio controls>
+  <source src="ma1.mp3" type="audio/mp3">
+</audio>
+<audio controls>
+  <source src="ma2.mp3" type="audio/mp3">
+</audio>
+</br>
+<audio controls>
+  <source src="ma3.mp3" type="audio/mp3">
+</audio>
+<audio controls>
+  <source src="ma4.mp3" type="audio/mp3">
+</audio>
+]
+
+</br>
+</br>
+</br>
+
+<font size="-2">Source: ThoughtCo </font>
+---
+
+# Models
+
+Phoneme acquisition:
+ - Speech Learning Model <font size="-1">(SLM, Flege, 1995)</font>
+ - Second Language Linguistic Perception <font size="-1">(L2LP, Escudero, 2005)</font>
+ - Perceptual Assimilation Model for Suprasegmentals <font size="-1">(PAM-S, So & Best, 2014)</font>
+
+---
+
+# Research Questions
+
+## Study 1: Linguistic anticipation
+	
+**RQ1. Do Spanish monolinguals, and intermediate and advanced Mandarin and English learners of Spanish use lexical stress to anticipate verbal suffixes in Spanish (living in L2 context)?**      
+**If so, are prediction abilities mediated by verbal WM?**
+
+</br>
+--
+**H1.** Only monolingual and advanced L2 speakers will anticipate <font size="-1">(Lozano et al., 2019; Sagarra & Casillas, 2018)</font>, but L2 will not reach native-like performance <font size="-1">(Perdomo & Kaan, 2019)</font>.
+WM will only affect performance in the L2 groups <font size="-1">(Huettig & Mani, 2016; Otten & van Berkum, 2009; Sagarra & Casillas, 2018)</font>.
+
+---
+
+# Methods
+
+## Participants
+
+- 30 monolinguals speakers of Spanish     
+- 30 L2 Spanish intermediate with L1 English     
+- 30 L2 Spanish advanced with L1 English     
+- 30 L2 Spanish intermediate with L1 Mandarin     
+- 30 L2 Spanish advanced with L1 Mandarin     
+
+???
+Right-handed
+No bil education
+Monolingual regions and families
+Studies up to high school at least
+At least two months living in Spanish-speaking countries
+Late L2 learners
+L2 use/week
+
+---
+
+# Methods
+
+## Materials and procedure
+
+- Spanish Proficiency Test
+- Sociolinguistic Background Questionnaire
+- Anticipation tasks:
+  - Linguistic anticipation
+- Working memory tasks:     
+  - Verbal memory  
+- Vocabulary test
+
+---
+
+# Methods
+
+## Materials and procedure
+
+- Spanish Proficiency Test     
+- Sociolinguistic Background Questionnaire
+.grey[
+- Anticipation tasks:
+  - Linguistic anticipation
+- Working memory tasks:     
+  - Verbal memory
+  ]
+- Vocabulary test
+
+---
+
+# Linguistic anticipation task 
+
+.pull-left[Visual-world paradigm]
+.pull-right[
+<audio controls>
+  <source src="S15_C2.wav" type="audio/wav">
+</audio>
+]
+```{r, include=TRUE, echo=FALSE}
+include_graphics("./00_intro/figs/vwp.png", dpi = 100) # the larger the number, the smaller the image
+```
+
+???
+Close tracking of time
+
+---
+
+# Verbal working memory
+
+Operation Span
+
+```{r, include=TRUE, echo=FALSE}
+include_graphics("./00_intro/figs/ospan.png", dpi = 108)
+```
+
+---
+
+# Results
+
+```{r, include=TRUE, echo=FALSE}
+include_graphics("./figs/stress/gca/stress_p1.png", dpi = 108)
+```
+
+</br>
+.center[SAL -ta v. sal -TÓ]
+
+---
+
+```{r, include=TRUE, echo=FALSE}
+include_graphics("./figs/stress/gca/stress_p2.png", dpi = 160)
+```
+
+---
+
+```{r, include=TRUE, echo=FALSE}
+include_graphics("./figs/stress/gca/stress_p3.png", dpi = 160)
+```
+
+
+---
+
+# Discussion
+
+**Do Spanish monolinguals, and intermediate and advanced Mandarin and English learners of Spanish use lexical stress to anticipate verbal suffixes in Spanish (living in L2 context)?**      
+**If so, are prediction abilities mediated by verbal WM?**
+
+- Context matters <font size="-1">(Beatty Martínez et al., 2019)</font>: Intermediate speakers can predict to a certain extent too <font size="-1">(Hed et al., 2019; Schremm et al., 2016 v. Lozano, 2020; Sagarra & Casillas, 2018)</font>
+
+--
+
+- Individual cognitive differences in terms of WM play no role <font size="-1">(e.g., Otten & Van Berkum, 2009; Tanner & Van Hell, 2014)</font>
+
+--
+
+- Function knowledge transfer is more effective than acoustic knowledge transfer
+
+--
+
+- SLM: L1 tone category prevents creation of L2 lexical stress category
+- L2LP: perception is different from recognition
+
+---
+
+# Conclusion
+
+- Previous as well as current context matter when learning how to use L2 prosody structures for easier processing of linguistic information and for prediction.
+- L2 proficiency and immersion can aid in overcoming L2 acquisition hurdles related to suprasegmentals.
+
+---
+
+class: title-slide-section-red, center, middle
+
+# Thank you!

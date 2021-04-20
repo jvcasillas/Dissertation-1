@@ -22,6 +22,10 @@ unique(stress_50$AVERAGE_IA_1_SAMPLE_COUNT)  # looking at target according to IA
 unique(stress_50$AVERAGE_IA_2_SAMPLE_COUNT)  # looking at distractor
 unique(stress_50$AVERAGE_IA_0_SAMPLE_COUNT)  # elsewhere
 
+# How much data we lose by selecting only accurate trials
+sum( ( stress_50$ACCURACY == 0 ) / length( stress_50$ACCURACY ) )
+# 0.004198754
+
 # Tidy data -------------------------------------------------------------------
 
 # Read data

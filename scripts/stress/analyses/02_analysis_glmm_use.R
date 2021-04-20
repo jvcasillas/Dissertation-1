@@ -591,6 +591,7 @@ stress_mon <- df_stress %>%
 
 stress_l2 <- df_stress %>%
   filter(., l1 != 'es') %>%
+  filter(., participant != 'ies04' & participant != 'ies17' & participant != 'ies28' & participant != 'aes32') %>%
   mutate(., l1 = fct_relevel(l1, "en", "ma"))
 
 
@@ -705,8 +706,8 @@ if(F) {
   
   anova(prop_0_ranefA, prop_0_ranefB, refit = F) # intercept
   #               npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)    
-  # prop_0_ranefA    2 27206 27217 -13601    27202                         
-  # prop_0_ranefB    3 26659 26676 -13326    26653 548.89  1  < 2.2e-16 ***
+  # prop_0_ranefA    2 26124 26135 -13060    26120                     
+  # prop_0_ranefB    3 25618 25635 -12806    25612 507.75  1  < 2.2e-16 ***
   
   prop_0_ranefC <- glmer(cbind(target_count, 10 - target_count) ~ 1 +
                            (1 + condition_sum | participant) +
@@ -716,8 +717,8 @@ if(F) {
   
   anova(prop_0_ranefB, prop_0_ranefC, refit = F) # slope
   #               npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)    
-  # prop_0_ranefB    3 26659 26676 -13326    26653                         
-  # prop_0_ranefC    5 25700 25728 -12845    25690 962.98  2  < 2.2e-16 ***
+  # prop_0_ranefB    3 25618 25635 -12806    25612          
+  # prop_0_ranefC    5 24740 24768 -12365    24730 882.41  2  < 2.2e-16 ***
   
 }
 
@@ -742,18 +743,18 @@ if(F) {
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_l1, test = "Chisq")
   #                  npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0     5 25700 25728 -12845    25690                     
-  # prop_0_l2_mod_l1    6 25701 25735 -12845    25689 0.6503  1       0.42
+  # prop_0_l2_mod_0     5 24740 24768 -12365    24730                    
+  # prop_0_l2_mod_l1    6 24742 24775 -12365    24730 0.083  1     0.7733
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_cond, test = "Chisq")   
   #                    npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0       5 25700 25728 -12845    25690                    
-  # prop_0_l2_mod_cond    7 25702 25741 -12844    25688  2.33  2     0.3119
+  # prop_0_l2_mod_0       5 24740 24768 -12365    24730                    
+  # prop_0_l2_mod_cond    7 24743 24782 -12364    24729 0.968  2     0.6163
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_int, test = "Chisq") 
   #                   npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0      5 25700 25728 -12845    25690                     
-  # prop_0_l2_mod_int    8 25704 25748 -12844    25688 2.3994  3     0.4937
+  # prop_0_l2_mod_0      5 24740 24768 -12365    24730                     
+  # prop_0_l2_mod_int    8 24744 24789 -12364    24728 1.0161  3     0.7973
   
   # ROUTE 1
   
@@ -762,20 +763,20 @@ if(F) {
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_wm, test = "Chisq") 
   #                  npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0     5 25700 25728 -12845    25690                     
-  # prop_0_l2_mod_wm    6 25702 25736 -12845    25690 0.0124  1     0.9113
+  # prop_0_l2_mod_0     5 24740 24768 -12365    24730                     
+  # prop_0_l2_mod_wm    6 24742 24775 -12365    24730 0.0164  1     0.8982
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_int_wm, test = "Chisq") # no interaction wm x condition
   #                      npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0         5 25700 25728 -12845    25690                       
-  # prop_0_l2_mod_int_wm    8 25699 25744 -12842    25683 6.6485  3    0.08399 .
+  # prop_0_l2_mod_0         5 24740 24768 -12365    24730                     
+  # prop_0_l2_mod_int_wm    8 24744 24788 -12364    24728 2.0041  3     0.5716
   
-  l2_onset_c2_all_final <- prop_0_l2_mod_0
+  l2_onset_c2_all_final <- prop_0_l2_mod_0 # for DELE and WM
   
   summary(l2_onset_c2_all_final) 
   # Fixed effects:
   #                       Estimate Std. Error z value Pr(>|z|)    
-  # (Intercept)           -0.05370    0.09108   -0.59    0.555
+  # (Intercept)           -0.29616    0.09794  -3.024  0.00249 **
   
   
   # ROUTE 2
@@ -785,13 +786,13 @@ if(F) {
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_dele, test = "Chisq") 
   # npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0       5 25700 25728 -12845    25690                     
-  # prop_0_l2_mod_dele    6 25701 25735 -12844    25689 1.0688  1     0.3012
+  # prop_0_l2_mod_0       5 24740 24768 -12365    24730                    
+  # prop_0_l2_mod_dele    6 24742 24775 -12365    24730 0.034  1     0.8538
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_int_dele, test = "Chisq") # no interaction wm x condition
   #                      npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0         5 25700 25728 -12845    25690                     
-  # prop_0_l2_mod_int_dele  8 25701 25747 -12842    25685 4.9354  3     0.1766
+  # prop_0_l2_mod_0         5 24740 24768 -12365    24730                     
+  # prop_0_l2_mod_int_dele    8 24745 24790 -12365    24729 0.2945  3     0.9611
   
   
   # ROUTE 3
@@ -800,16 +801,22 @@ if(F) {
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_use, test = "Chisq") 
   #                   npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)  
-  # prop_0_l2_mod_0      5 25700 25728 -12845    25690                     
-  # prop_0_l2_mod_use    6 25701 25735 -12845    25689 0.7009  1     0.4025
+  # prop_0_l2_mod_0      5 24740 24768 -12365    24730                       
+  # prop_0_l2_mod_use    6 24736 24769 -12362    24724 5.9657  1    0.01459 *
   
-  prop_0_l2_mod_int_use   <- update(prop_0_l2_mod_0,  . ~ . + l1:condition_sum:percent_l2_week)
+  prop_0_l2_mod_int_use   <- update(prop_0_l2_mod_use,  . ~ . + l1:condition_sum:percent_l2_week)
   
-  anova(prop_0_l2_mod_0, prop_0_l2_mod_int_use, test = "Chisq")
+  anova(prop_0_l2_mod_use, prop_0_l2_mod_int_use, test = "Chisq")
   #                       npar   AIC   BIC logLik deviance Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0          5 25700 25728 -12845    25690                     
-  # prop_0_l2_mod_int_use    7 25701 25740 -12843    25687 3.0221  2     0.2207
+  # prop_0_l2_mod_use        6 24736 24769 -12362    24724                     
+  # prop_0_l2_mod_int_use    8 24737 24782 -12360    24721 2.7048  2     0.2586
   
+  l2_onset_c2_use_final <- prop_0_l2_mod_use
+  
+  summary(l2_onset_c2_use_final)
+  # Estimate Std. Error z value Pr(>|z|)  
+  # (Intercept)     -0.030531   0.144633  -0.211   0.8328  
+  # percent_l2_week -0.006954   0.002813  -2.472   0.0134 *
 }
 # -----------------------------------------------------------------------------
 
@@ -852,7 +859,8 @@ if(F) {
                                   "glmm", "onset_c2", "prop_0_l2_mod_use.rds"))
   saveRDS(prop_0_l2_mod_int_use, here("mods", "stress", 
                                       "glmm", "onset_c2", "prop_0_l2_mod_int_use.rds"))
-  
+  saveRDS(l2_onset_c2_use_final, here("mods", "stress", 
+                                       "glmm", "onset_c2", "l2_onset_c2_use_final.rds"))
   
 }
 
@@ -944,6 +952,7 @@ stress_mon <- df_stress %>%
 
 stress_l2 <- df_stress %>%
   filter(., l1 != 'es') %>%
+  filter(., participant != 'ies04' & participant != 'ies17' & participant != 'ies28' & participant != 'aes32') %>%
   mutate(., l1 = fct_relevel(l1, "en", "ma"))
 
 
@@ -1057,8 +1066,8 @@ if(F) {
   
   anova(prop_0_ranefA, prop_0_ranefB, refit = F) # intercept
   #               npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)    
-  # prop_0_ranefA    2 24081 24092 -12039    24077                     
-  # prop_0_ranefB    3 23634 23651 -11814    23628 448.85  1  < 2.2e-16 ***
+  # prop_0_ranefA    2 23424 23435 -11710    23420                     
+  # prop_0_ranefB    3 23002 23018 -11498    22996 424.46  1  < 2.2e-16 ***
   
   prop_0_ranefC <- glmer(cbind(target_count, 10 - target_count) ~ 1 +
                            (1 + condition_sum | participant) +
@@ -1068,8 +1077,8 @@ if(F) {
   
   anova(prop_0_ranefB, prop_0_ranefC, refit = F) # slope
   #               npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)    
-  # prop_0_ranefB    3 23634 23651 -11814    23628                     
-  # prop_0_ranefC    5 22693 22721 -11341    22683 945.72  2  < 2.2e-16 ***
+  # prop_0_ranefB    3 23002 23018 -11498    22996                     
+  # prop_0_ranefC    5 22126 22154 -11058    22116 879.51  2  < 2.2e-16 ***
   
 }
 
@@ -1094,89 +1103,101 @@ if(F) {
   
   anova(prop_0_l2_mod_0, prop_0_l2_mod_l1, test = "Chisq")
   #                  npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_0     5 22693 22721 -11341    22683                       
-  # prop_0_l2_mod_l1    6 22691 22724 -11339    22679 3.8936  1    0.04847 *
+  # prop_0_l2_mod_0     5 22126 22154 -11058    22116                       
+  # prop_0_l2_mod_l1    6 22125 22158 -11056    22113 3.3256  1    0.06821 .
   
-  anova(prop_0_l2_mod_l1, prop_0_l2_mod_cond, test = "Chisq")   
+  anova(prop_0_l2_mod_0, prop_0_l2_mod_cond, test = "Chisq")   
   #                    npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_l1      6 22691 22724 -11339    22679                     
-  # prop_0_l2_mod_cond    7 22690 22730 -11338    22676 2.3843  1     0.1226
+  # prop_0_l2_mod_0       5 22126 22154 -11058    22116                       
+  # prop_0_l2_mod_cond    7 22123 22162 -11055    22109 6.9681  2    0.03068 *
   
-  anova(prop_0_l2_mod_l1, prop_0_l2_mod_int, test = "Chisq") 
-  #                   npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_l1     6 22691 22724 -11339    22679                     
-  # prop_0_l2_mod_int    8 22692 22737 -11338    22676 2.6289  2     0.2686
+  anova(prop_0_l2_mod_cond, prop_0_l2_mod_int, test = "Chisq") 
+  #                    npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
+  # prop_0_l2_mod_cond    7 22123 22162 -11055    22109                    
+  # prop_0_l2_mod_int     8 22125 22170 -11054    22109  0.38  1     0.5376
   
   # ROUTE 1
   
-  prop_0_l2_mod_wm       <- update(prop_0_l2_mod_l1,  . ~ . + ospan)
+  prop_0_l2_mod_wm       <- update(prop_0_l2_mod_cond,  . ~ . + ospan)
   prop_0_l2_mod_int_wm   <- update(prop_0_l2_mod_wm,    . ~ . + l1:condition_sum:ospan)
   
-  anova(prop_0_l2_mod_l1, prop_0_l2_mod_wm, test = "Chisq") 
+  anova(prop_0_l2_mod_cond, prop_0_l2_mod_wm, test = "Chisq") 
   #                  npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_l1    6 22691 22724 -11339    22679                     
-  # prop_0_l2_mod_wm    7 22692 22731 -11339    22678 0.7477  1     0.3872
+  # prop_0_l2_mod_cond    7 22123 22162 -11055    22109                     
+  # prop_0_l2_mod_wm      8 22124 22169 -11054    22108 0.9879  1     0.3203
   
-  anova(prop_0_l2_mod_l1, prop_0_l2_mod_int_wm, test = "Chisq") # no interaction wm x condition
+  anova(prop_0_l2_mod_cond, prop_0_l2_mod_int_wm, test = "Chisq") # no interaction wm x condition
   #                      npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_l1        6 22691 22724 -11339    22679                     
-  # prop_0_l2_mod_int_wm    9 22693 22744 -11338    22674 5.0139  3     0.1708
+  # prop_0_l2_mod_cond      7 22123 22162 -11055    22109                     
+  # prop_0_l2_mod_int_wm   10 22125 22181 -11053    22105 3.8324  3     0.2801
   
-  l2_onset_c3_wm_final <- prop_0_l2_mod_l1
+  l2_onset_c3_wm_final <- prop_0_l2_mod_cond
   
   summary(l2_onset_c3_wm_final) 
   # Fixed effects:
-  #             Estimate Std. Error z value Pr(>|z|)    
-  # (Intercept)   1.0229     0.1222   8.371   <2e-16 ***
-  # l1ma         -0.2817     0.1418  -1.987    0.047 *  
+  #               Estimate Std. Error z value Pr(>|z|)    
+  # (Intercept)    0.99976    0.12059   8.290   <2e-16 ***
+  # l1ma          -0.25833    0.13990  -1.846   0.0648 .  
+  # condition_sum -0.15232    0.07945  -1.917   0.0552 .
   
   
   # ROUTE 2
   
-  prop_0_l2_mod_dele       <- update(prop_0_l2_mod_l1,  . ~ . + DELE_z)
+  prop_0_l2_mod_dele       <- update(prop_0_l2_mod_cond,  . ~ . + DELE_z)
   prop_0_l2_mod_int_dele   <- update(prop_0_l2_mod_dele,  . ~ . + l1:condition_sum:DELE_z)
   
-  anova(prop_0_l2_mod_l1, prop_0_l2_mod_dele, test = "Chisq") 
+  anova(prop_0_l2_mod_cond, prop_0_l2_mod_dele, test = "Chisq") 
   #                    npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_l1      6 22691 22724 -11339    22679                         
-  # prop_0_l2_mod_dele    7 22681 22720 -11334    22667 11.681  1  0.0006315 ***
+  # prop_0_l2_mod_cond    7 22123 22162 -11055    22109                        
+  # prop_0_l2_mod_dele    8 22112 22157 -11048    22096 13.44  1  0.0002463 ***
   
   anova(prop_0_l2_mod_dele, prop_0_l2_mod_int_dele, test = "Chisq") # no interaction wm x condition
   #                        npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_dele        7 22681 22720 -11334    22667                     
-  # prop_0_l2_mod_int_dele    9 22681 22732 -11331    22663 3.8118  2     0.1487
+  # prop_0_l2_mod_dele        8 22112 22157 -11048    22096                      
+  # prop_0_l2_mod_int_dele   10 22109 22165 -11044    22089 7.057  2    0.02935 *
   
-  l2_onset_c3_dele_final <- prop_0_l2_mod_dele
+  l2_onset_c3_dele_final <- prop_0_l2_mod_int_dele
   
   summary(l2_onset_c3_dele_final) 
-  #             Estimate Std. Error z value Pr(>|z|)    
-  # (Intercept)  1.13698    0.12306   9.239  < 2e-16 ***
-  # l1ma        -0.30357    0.13565  -2.238 0.025229 *  
-  # DELE_z       0.29812    0.08529   3.495 0.000474 ***
+  #                           Estimate Std. Error z value Pr(>|z|)    
+  # (Intercept)                1.10415    0.11957   9.235  < 2e-16 ***
+  # l1ma                      -0.26933    0.13337  -2.019 0.043441 *  
+  # condition_sum             -0.18779    0.08133  -2.309 0.020934 *  
+  # DELE_z                     0.31939    0.08338   3.830 0.000128 ***
+  # l1en:condition_sum:DELE_z -0.25396    0.09595  -2.647 0.008129 ** 
+  # l1ma:condition_sum:DELE_z  0.03215    0.09962   0.323 0.746920 
   
+  
+  stress_l2 %>%
+    group_by(condition_sum) %>%
+    summarize(gaze_fix = mean(target_count)) %>% print()
+  #   condition_sum gaze_fix
+  # 1            -1     6.94
+  # 2             1     6.47
   
   # ROUTE 3
   
-  prop_0_l2_mod_use  <- update(prop_0_l2_mod_l1,  . ~ . + use_z)
+  prop_0_l2_mod_use  <- update(prop_0_l2_mod_cond,  . ~ . + use_z)
   prop_0_l2_mod_int_use   <- update(prop_0_l2_mod_use,  . ~ . + l1:condition_sum:use_z)
   
-  anova(prop_0_l2_mod_l1, prop_0_l2_mod_use, test = "Chisq") 
-  #                   npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)  
-  # prop_0_l2_mod_l1     6 22691 22724 -11339    22679                       
-  # prop_0_l2_mod_use    7 22687 22726 -11336    22673 5.7922  1     0.0161 *
+  anova(prop_0_l2_mod_cond, prop_0_l2_mod_use, test = "Chisq") 
+  #                    npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)  
+  # prop_0_l2_mod_cond    7 22123 22162 -11055    22109                       
+  # prop_0_l2_mod_use     8 22118 22163 -11051    22102 7.449  1   0.006347 **
   
   anova(prop_0_l2_mod_use, prop_0_l2_mod_int_use, test = "Chisq")
   #                       npar   AIC   BIC logLik deviance  Chisq Df Pr(>Chisq)
-  # prop_0_l2_mod_use        7 22687 22726 -11336    22673                     
-  # prop_0_l2_mod_int_use    9 22690 22741 -11336    22672 0.9531  2     0.6209
+  # prop_0_l2_mod_use        8 22118 22163 -11051    22102                     
+  # prop_0_l2_mod_int_use   10 22121 22177 -11051    22101 0.5688  2     0.7525
   
   l2_onset_c3_use_final <- prop_0_l2_mod_use
   
   summary(l2_onset_c3_use_final)
-  #                  Estimate Std. Error z value Pr(>|z|)    
-  # (Intercept)      1.14204    0.13005   8.781   <2e-16 ***
-  # l1ma            -0.35199    0.14163  -2.485   0.0129 *  
-  # use_z            0.23642    0.09709   2.435   0.0149 *   
+  #               Estimate Std. Error z value Pr(>|z|)    
+  # (Intercept)    1.11964    0.12606   8.882  < 2e-16 ***
+  # l1ma          -0.32312    0.13791  -2.343  0.01913 *  
+  # condition_sum -0.15396    0.07939  -1.939  0.05248 .  
+  # use_z          0.26537    0.09587   2.768  0.00564 **  
     
 }
 

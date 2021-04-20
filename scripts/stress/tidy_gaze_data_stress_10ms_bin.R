@@ -72,7 +72,7 @@ stress10 <- stress10 %>%
   
   # CHANGE onset_c3 DEPENDING ON TRIGGER TO ANALYZE
   dplyr::select(participant, group, target, cond, target, bin,
-                target_count, target_prop, eLog, wts, onset_c2) %>% 
+                target_count, target_prop, eLog, wts, onset_v1) %>% 
   gather(., landmark, lm_bin, -c(participant:wts)) %>%
   mutate(., lm_bin = (lm_bin / 10) %>% ceiling(.),
          t_onset = if_else(bin == lm_bin, TRUE, FALSE)) %>%
@@ -119,7 +119,7 @@ stress10 <- stress10 %>%
 
 # stress10 <- merge(x = stress10, y = wm, by = "participant", all.x=TRUE)
 
-write_csv(stress10, here("data", "clean", "stress_10ms_final_onset_c2.csv"))
+write_csv(stress10, here("data", "clean", "stress_10ms_final_onset_v1.csv"))
 
 
 # -----------------------------------------------------------------------------

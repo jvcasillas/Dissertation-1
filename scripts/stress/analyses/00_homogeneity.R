@@ -106,6 +106,127 @@ TOSTtwo(m1 = 0, sd1 = 2.14, n1 = 64, # MA
 
 dem_all$DELE <- as.numeric(dem_all$DELE)
 
+
+#### BY L1
+# Create a table with mean + sd for: wm, pstm, dele, aoa_l2, months_abroad,
+# l1_use_week, l2_use_week, years_word_int
+
+dem_all %>%
+  group_by(., l1) %>%
+  filter(., l1 != "es") %>%
+  summarise(., dele = round(mean(DELE),2),
+            dele_sd = round(sd(DELE),2),
+            n = length(unique(participant))) %>%
+  knitr::kable()
+
+# |l1 |  dele| dele_sd|  n|
+# |:--|-----:|-------:|--:|
+# |en | 38.48|    8.19| 65|
+# |ma | 39.17|    7.56| 64|
+
+
+dem_all %>%
+  group_by(., l1) %>%
+  summarise(aoa_l2 = round(mean(AoA_L2),2),
+            aoa_l2_sd = round(sd(AoA_L2),2),
+            abroad = round(mean(mo_ES_country),2),
+            abroad_sd = round(sd(mo_ES_country),2),
+            l1_use = round(mean(percent_l1_week),2),
+            l1_use_sd = round(sd(percent_l1_week),2),
+            l2_use = round(mean(percent_l2_week),2),
+            l2_use_sd = round(sd(percent_l2_week),2),
+            n = length(unique(participant))
+  ) %>% knitr::kable()
+# |l1 | aoa_l2| aoa_l2_sd| abroad| abroad_sd| l1_use| l1_use_sd| l2_use| l2_use_sd|  n|
+# |:--|------:|---------:|------:|---------:|------:|---------:|------:|---------:|--:|
+# |en |  16.29|      5.55|  38.08|     33.48|  66.62|     17.44|  33.31|     17.44| 65|
+# |es |   7.03|      6.82|   0.30|      1.64|  10.73|      9.28|  88.93|      9.43| 30|
+# |ma |  18.88|      3.59|  40.83|     45.46|  58.05|     22.14|  41.64|     21.66| 64|
+
+
+## Homogeneity of variances tests
+dem_all <- dem_all %>%
+  filter(., l1 != "es")
+
+bartlett.test(DELE ~ l1, data = dem_all) # K-squared = 0.39147, df = 1, p-value = 0.5315
+bartlett.test(AoA_L2 ~ l1, data = dem_all) # K-squared = 11.629, df = 1, p-value = 0.0006495
+bartlett.test(mo_ES_country ~ l1, data = dem_all) # K-squared = 5.8093, df = 1, p-value = 0.01594
+bartlett.test(percent_l1_week ~ l1, data = dem_all) # K-squared = 3.5658, df = 1, p-value = 0.05898
+bartlett.test(percent_l2_week ~ l1, data = dem_all) # K-squared = 2.9384, df = 1, p-value = 0.0865
+
+
+# time abroad 
+t.test(mo_ES_country ~ l1, data = dem_all, var.equal = TRUE)
+
+TOSTtwo(m1 = 38.08, sd1 = 33.48, n1 = 65, # en
+        m2 = 40.83, sd2 = 45.46, n2 = 64, # ma
+        low_eqbound_d = -0.3,
+        high_eqbound_d = 0.3,
+        alpha = 0.05)
+# The null hypothesis test was non-significant, t(115.76) = -0.391, p = 0.697, given an alpha of 0.05.
+
+
+# dele 
+t.test(DELE ~ l1, data = dem_all, var.equal = TRUE)
+# t = -0.50059, df = 127, p-value = 0.6175
+
+TOSTtwo(m1 = 38.48, sd1 = 8.19, n1 = 65, # EN
+        m2 = 39.17, sd2 = 7.56, n2 = 64, # MA
+        low_eqbound_d = -0.3,
+        high_eqbound_d = 0.3,
+        alpha = 0.05)
+# t(126.48) = -0.497, p = 0.620
+
+
+# L2 weekly use
+# significant and outside area between dotted lines
+TOSTtwo(m1 = 33.31, sd1 = 17.44, n1 = 65, # EN
+        m2 = 41.64, sd2 = 21.66, n2 = 64, # MA
+        low_eqbound_d = -0.3,
+        high_eqbound_d = 0.3,
+        alpha = 0.05)
+# t(120.69) = -2.404, p = 0.0178
+
+t.test(percent_l2_week ~ l1, data = dem_all, var.equal = TRUE)
+# t = -2.4087, df = 127, p-value = 0.01745
+
+
+
+arrange(dem_all, (desc(percent_l2_week))) %>% View()
+
+t.test(percent_l2_week ~ l1, data = dem_all %>% filter(participant != 'IES04' & participant != 'IES17' & 
+                                                         participant != 'AES32' & participant != 'IES28'), var.equal = TRUE)
+# t = -1.9516, df = 123, p-value = 0.05326
+bartlett.test(percent_l2_week ~ l1, data = dem_all %>% filter(participant != 'IES04' & participant != 'IES17' & 
+                                                                participant != 'AES32' & participant != 'IES28'))
+# K-squared = 3.6896, df = 1, p-value = 0.05475
+t.test(DELE ~ l1, data = dem_all %>% filter(participant != 'IES04' & participant != 'IES17' & 
+                                                         participant != 'AES32' & participant != 'IES28'), var.equal = TRUE)
+# t = -0.14658, df = 123, p-value = 0.8837
+bartlett.test(DELE ~ l1, data = dem_all %>% filter(participant != 'IES04' & participant != 'IES17' & 
+                                                                participant != 'AES32' & participant != 'IES28'))
+
+# Bartlett's K-squared = 0.23176, df = 1, p-value = 0.6302
+
+dem_all %>%
+  filter(., participant != 'IES04' & participant != 'IES17' & 
+           participant != 'AES32' & participant != 'IES28') %>%
+  group_by(., l1) %>%
+  summarise(
+            l2_use = round(mean(percent_l2_week),2),
+            l2_use_sd = round(sd(percent_l2_week),2),
+            n = length(unique(participant))
+  ) %>% knitr::kable()
+# |l1 | l2_use| l2_use_sd|  n|
+#   |:--|------:|---------:|--:|
+#   |en |  34.84|     16.91| 61|
+#   |ma |  41.64|     21.66| 64|
+
+
+
+
+## BY GROUP
+
 # Create a table with mean + sd for: wm, pstm, dele, aoa_l2, months_abroad,
 # l1_use_week, l2_use_week, years_word_int
 

@@ -144,7 +144,7 @@ stress_mon <- model_preds$fits_all_mon %>%
 
 
 # Within group differences
-stress_dele_l1 <- model_preds$fits_all_l2_dele %>%
+stress_dele_l1_tog <- fits_all_l2_dele %>% #model_preds$
   mutate(condition = if_else(condition_sum == 1, "Present", "Preterit"),
          condition = fct_relevel(condition, "Present"),
          l1 = if_else(l1 == 'EN', 'English', 'Mandarin'),
@@ -181,13 +181,48 @@ stress_dele_l1 <- model_preds$fits_all_l2_dele %>%
     panel.grid.major = element_line(colour = 'grey90', size = 0.15),
     panel.grid.minor = element_line(colour = 'grey90', size = 0.15)
   )
-  
 
-  
+
+# stress_dele_l1_sep <- fits_all_l2_dele %>% #model_preds$
+#   mutate(condition = if_else(condition_sum == 1, "Present", "Preterit"),
+#          condition = fct_relevel(condition, "Present"),
+#          l1 = if_else(l1 == 'EN', 'English', 'Mandarin'),
+#          l1 = fct_relevel(l1, "English", "Mandarin")) %>%
+#   ggplot(., aes(x = time_zero, y = fit, ymax = ymax, ymin = ymin)) +
+#   facet_grid(l1 ~ condition) +
+#   geom_hline(yintercept = 0, lty = 3, size = 0.4) +
+#   geom_vline(xintercept = 4, lty = 3, size = 0.4) +
+#   stat_summary(fun.y = "mean", geom = "line", size = 1) + 
+#   # geom_ribbon(alpha = 0.2, color = "grey", show.legend = F) +
+#   stat_summary(fun.data = mean_cl_boot, geom = 'ribbon',fun.args=list(conf.int=0.95),
+#                alpha = 0.5) +
+#   geom_point(aes(color = DELE_z), alpha = .5, pch = 21, size = 0.85, show.legend = T) +
+#   scale_x_continuous(breaks = c(-4, 0, 4, 8, 12),
+#                      labels = c("-200", "0", "200", "400", "600")) +
+#   labs(x = "Time (ms) relative to target syllable offset",
+#        y = "Empirical logit of looks to target",
+#        color = 'L2 proficiency') +
+#   scale_fill_brewer(palette = 'Set1', name = "Tense",
+#                     labels = c("Present", "Preterit")) +
+#   theme_big + labs(color = "Proficiency") +
+#   theme(
+#     legend.position = c(0.06, 0.7),
+#     legend.key = element_blank(),
+#     legend.background = element_blank(),
+#     strip.background = element_blank(),
+#     axis.title.y = element_text(size = rel(.9), hjust = 0.95),
+#     axis.title.x = element_text(size = rel(.9)),
+#     legend.key.size = unit(0.75, 'lines'),
+#     legend.text = element_text(size = 6),
+#     legend.title = element_text(size = 7),
+#     plot.margin = unit(rep(2, 4), "mm"),
+#     panel.grid.major = element_line(colour = 'grey90', size = 0.15),
+#     panel.grid.minor = element_line(colour = 'grey90', size = 0.15)
+#   )
 
 
 # Within condition differences
-stress_dele_cond <- model_preds$fits_all_l2_dele %>%
+stress_dele_cond_tog <- fits_all_l2_dele %>% #model_preds$
   mutate(condition = if_else(condition_sum == 1, "Present", "Preterit"),
          condition = fct_relevel(condition, "Present"),
          l1 = if_else(l1 == 'EN', 'English', 'Mandarin'),
@@ -226,7 +261,7 @@ stress_dele_cond <- model_preds$fits_all_l2_dele %>%
   )
 
 # Condition and L1 split
-stress_dele_split <- model_preds$fits_all_l2_dele %>%
+stress_dele_split <- fits_all_l2_dele %>% #model_preds$
   mutate(condition = if_else(condition_sum == 1, "Present", "Preterit"),
          condition = fct_relevel(condition, "Present"),
          l1 = if_else(l1 == 'EN', 'English', 'Mandarin'),
@@ -267,7 +302,7 @@ stress_dele_split <- model_preds$fits_all_l2_dele %>%
 # L2 use
 
 # Within group differences
-stress_use_l1 <- model_preds$fits_all_l2_use %>%
+stress_use_l1_tog <- fits_all_l2_use %>% #model_preds$
   mutate(condition = if_else(condition_sum == 1, "Present", "Preterit"),
          condition = fct_relevel(condition, "Present"),
          l1 = if_else(l1 == 'EN', 'English', 'Mandarin'),
@@ -306,7 +341,7 @@ stress_use_l1 <- model_preds$fits_all_l2_use %>%
   )
 
 # Within condition differences
-stress_use_cond <- model_preds$fits_all_l2_use %>%
+stress_use_cond_tog <- fits_all_l2_use %>% #model_preds$
   mutate(condition = if_else(condition_sum == 1, "Present", "Preterit"),
          condition = fct_relevel(condition, "Present"),
          l1 = if_else(l1 == 'EN', 'English', 'Mandarin'),
@@ -345,7 +380,7 @@ stress_use_cond <- model_preds$fits_all_l2_use %>%
   )
 
 # Condition and L1 split
-stress_use_split <- model_preds$fits_all_l2_dele %>%
+stress_use_split <- fits_all_l2_dele %>% #model_preds$
   mutate(condition = if_else(condition_sum == 1, "Present", "Preterit"),
          condition = fct_relevel(condition, "Present"),
          l1 = if_else(l1 == 'EN', 'English', 'Mandarin'),
@@ -508,15 +543,15 @@ stress_wm_split <- model_preds$fits_all_l2_wm %>%
 
 ggsave(paste0(figs_path, "/stress_mon.png"), stress_mon, width = 150,
        height = 120, units = "mm", dpi = 600)
-ggsave(paste0(figs_path, "/stress_dele_l1.png"), stress_dele_l1, width = 150,
+ggsave(paste0(figs_path, "/stress_dele_l1_tog.png"), stress_dele_l1_tog, width = 150,
        height = 120, units = "mm", dpi = 600)
-ggsave(paste0(figs_path, "/stress_dele_cond.png"), stress_dele_cond, width = 150,
+ggsave(paste0(figs_path, "/stress_dele_cond_tog.png"), stress_dele_cond_tog, width = 150,
        height = 120, units = "mm", dpi = 600)
 ggsave(paste0(figs_path, "/stress_dele_split.png"), stress_dele_split, width = 150,
        height = 120, units = "mm", dpi = 600)
-ggsave(paste0(figs_path, "/stress_use_l1.png"), stress_use_l1, width = 150,
+ggsave(paste0(figs_path, "/stress_use_l1_tog.png"), stress_use_l1_tog, width = 150,
        height = 120, units = "mm", dpi = 600)
-ggsave(paste0(figs_path, "/stress_use_cond.png"), stress_use_cond, width = 150,
+ggsave(paste0(figs_path, "/stress_use_cond_tog.png"), stress_use_cond_tog, width = 150,
        height = 120, units = "mm", dpi = 600)
 ggsave(paste0(figs_path, "/stress_use_split.png"), stress_use_split, width = 150,
        height = 120, units = "mm", dpi = 600)
