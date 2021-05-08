@@ -1,15 +1,16 @@
-Lexical stress is the auditory emphasis of a syllable relative to the rest of the syllables in a word (Hualde, 2005).
-Spanish and English have lexical stress, and Mandarin Chinese arguably so. Different acoustic correlates, their importance or weight, and their combinations cause the acoustic realization of lexical stress in each language to vary. 
-In Spanish, pitch (F0) is higher for stressed syllables and lower for unstressed syllables, and stressed syllables sound louder and are usually slightly longer (Hualde, 2005; Ortega-Llebaria, 2006; Ortega-Llebaria & Prieto, 2007, 2009).
-Lexical stress plays a phonologically contrastive function at the lexical level depending on its location.
+Lexical stress is the auditory emphasis of a syllable relative to the rest of the syllables in a word (Hualde, 2005). <!-- The word "auditory" causes problems here. As you note in a couple sentences below, a common correlate of lexical stress is an increase in duration and now not how sure this fits in with the notion of auditory emphasis. I think you are better off saying something like "relative" because all of the acustic correlates you mention are meaningless unless they are compared to the pitch, loudness, and duration of another syllable. --> 
+Spanish and English have lexical stress, and Mandarin Chinese arguably so. <!-- Ending a sentence with arguably so sounds weird to me. You can be more precise here. --> 
+Different acoustic correlates, their importance or weight, and their combinations cause the acoustic realization of lexical stress in each language to vary. <!-- Don't conflate importance and weight. --> 
+In Spanish, pitch (F0) is higher for stressed syllables and lower for unstressed syllables, and stressed syllables sound louder and are usually slightly longer (Hualde, 2005; Ortega-Llebaria, 2006; Ortega-Llebaria & Prieto, 2007, 2009). <!-- Again, I think you are better off explaining this in terms of relative differences (i.e., In Spanish, pitch (F0) is typically higher in stressed syllables when compared with unstressed syllables...). Err on the side of hedging because none of these correlates are absolute guaruntees. --> 
+Lexical stress plays a phonologically contrastive function at the lexical level depending on its location. <!-- Just say that it is contrastive. The rest is redundant. --> 
 It may differentiate verbal tense and person (CANto “I sing” vs canTÓ “s/he sang”), nouns (PApa “potato” vs paPÁ “dad”), or nouns from verbs (TÉRmino “term” vs. terMIno “I finish” vs termiNÓ “s/he finished”), for instance. 
-Lexical stress thus facilitates lexical activation in Spanish (Soto-Faraco et al., 2001).
+Lexical stress thus facilitates lexical activation in Spanish (Soto-Faraco et al., 2001). <!-- I don't know that this sentence is the logical conclusion of the previous one (as implied by "thus"). --> 
 
-In English, the main correlates are vowel duration and quality (Cooper, Cutler, & Wales, 2002; Cutler, 1986), but other correlates such as pitch may also be involved in stressed syllables (Fry, 1955, 1958). 
-Like in Spanish, lexical stress is used predominantly to distinguish heteronyms or pairs of verb-noun that have no segmental differences (to “proDUCE,” verb vs “PROduce,” noun). 
-However, English speakers only use it in certain cases and rely more on segmental information for lexical activation (Cooper et al., 2002).
+In English, the main correlates are vowel duration and quality (Cooper, Cutler, & Wales, 2002; Cutler, 1986), but other correlates such as pitch may also be involved in stressed syllables (Fry, 1955, 1958). <!-- "the main correlates" of stress -->
+Like in Spanish, lexical stress is used predominantly to distinguish heteronyms or pairs of verb-noun that have no segmental differences (to “proDUCE,” verb vs “PROduce,” noun). <!-- "verb-noun pairs" --> 
+However, English speakers only use it in certain cases and rely more on segmental information for lexical activation (Cooper et al., 2002). <!-- You make your reader wonder what those cases are --> 
 
-Lexical stress in Mandarin Chinese is harder to classify. 
+Lexical stress in Mandarin Chinese is harder to classify. <!-- Note that it is also hard to classify in English and Spanish too (the whole stress-timed vs. syllable-timed issue). I only mention this here because it always comes up, so this is just a reminder that those classifications are debated. --> 
 Some scholars have in fact described Mandarin Chinese as a language without stress (Hyman, 1977), while others propose that Mandarin Chinese may have some realization of lexical stress (e.g., Duanmu, 2007). 
 However, it is unclear how stress is represented in speakers’ minds. 
 Shanghai Chinese speakers, for example, have no judgment on stress (Selkirk & Shen, 1990). 
@@ -20,9 +21,9 @@ Tones are the pitch contour modulations in each syllable (Chao, 1968).
 The acoustic correlate for tones in most Mandarin dialects (e.g., from Beijing and Tianjin) is pitch contour (Gandour & Fromkin, 1978; Zhu & Wang, 2015), accompanied by other correlates like creakiness for some of the tones (e.g., tone 3, Chao, 1968). 
 The interaction of pitch in stress with pitch in tones may prevent speakers from distinguishing between stress or tones.
 For Mandarin speakers, segmental information in the shape of vowels and to a lesser extent consonants is more important than suprasegmental information (i.e., tones) in activating words (Hu et al., 2012; Wiener & Turnbull, 2016).
-In this context, lexical stress is not related to word structure but to pragmatic intentions (Zhang & Li, 2011).
+In this context, lexical stress is not related to word structure but to pragmatic intentions (Zhang & Li, 2011). <!-- Very clear. Nice! --> 
 
 Spanish, English and Mandarin differ in how they realize stress and in how it is used during processing. 
 English shares with Spanish the contrastive function and the absence of any competing suprasegmental structure. 
 Mandarin Chinese lexical stress barely shares acoustic correlates with Spanish, is mixed with tones and does not contrast words. 
-We can therefore conclude that Spanish and English lexical stress is phonologically closer, while Spanish and Mandarin lexical stress is phonologically more distant.
+We can therefore conclude that Spanish and English lexical stress is phonologically closer, while Spanish and Mandarin lexical stress is phonologically more distant. <!-- I'm not a fan of phonologically closer. Have you seen this used before? I think I would opt for describing more in this case (i.e., the role of stress is more similar in Spanish and English than it is in Spanish and Mandarin)... or something to that effect. --> 
